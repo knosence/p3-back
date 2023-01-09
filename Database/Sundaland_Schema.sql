@@ -1,5 +1,5 @@
-Drop DATABASE  IF EXISTS Sundaland;
-CREATE DATABASE Sundaland;
+Drop DATABASE  IF EXISTS sundaland;
+CREATE DATABASE sundaland;
 
 DROP TABLE IF EXISTS company;
 CREATE TABLE company (

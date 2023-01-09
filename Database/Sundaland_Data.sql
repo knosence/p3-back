@@ -1,4 +1,4 @@
-USE Sundaland;
+USE sundaland;
 
 INSERT INTO company (company_id, company_name, location_id)
 values 
