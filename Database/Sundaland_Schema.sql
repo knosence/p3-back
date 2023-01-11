@@ -34,7 +34,7 @@ CREATE TABLE warehouse (
 CREATE TABLE item (
 	item_id INT NOT NULL PRIMARY KEY,
 	item_name VARCHAR(40) NOT NULL,
-	item_discription TINYTEXT NOT NULL,
+	item_discription VARCHAR(255) NOT NULL,
 	item_size TINYINT NOT NULL
 );
 
