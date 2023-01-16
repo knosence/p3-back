@@ -3,8 +3,11 @@ package com.skillstrom.projectthree.warehouseapi.models;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "employee")
+@Entity(name = "Employee")
+@Table(
+        name = "employee",
+        uniqueConstraints = {@UniqueConstraint(name = "employee_email_unique", columnNames = "employee_email")}
+)
 public class Employee {
 
     @Id

@@ -54,4 +54,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
     }
+
+    @Override
+    public Iterable<Employee> findEmployeesByWarehouseId(int id) {
+        return employeeRepository.findEmployeesByWarehouseId(id);
+    }
 }

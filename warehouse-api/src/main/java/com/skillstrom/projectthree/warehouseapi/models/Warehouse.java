@@ -2,27 +2,52 @@ package com.skillstrom.projectthree.warehouseapi.models;
 
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "warehouse")
 public class Warehouse {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "warehouses_sequence",
+            sequenceName = "warehouses_sequence",
+            allocationSize = 1,
+            initialValue = 100
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "warehouses_sequence"
+    )
     @Column(name = "warehouse_id", updatable = false)
     private int warehouseId;
 
-    @Column(name = "warehouse_name")
-    private String warehouseName;
 
     @Column(name = "warehouse_address")
-    private Location warehouseAddress;
+    private int warehouseAddress;
 
     @Column(name = "warehouse_capacity")
     private int warehouseCapacity;
 
     @Column(name = "company")
-    private Company company;
+    private int company;
+
+    @ManyToMany
+    @JoinTable(
+            name = "warehouse_employee",
+            joinColumns = @JoinColumn(name = "warehouse_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_quantity")
+    )
+    private Set<Item> inventory = new HashSet<>();
+
+    public Set<Item> getItems() {
+        return inventory;
+    }
+
+    public void setItems(Item items) {
+        this.inventory.add(items);
+    }
 
     public int getWarehouseId() {
         return warehouseId;
@@ -32,19 +57,11 @@ public class Warehouse {
         this.warehouseId = warehouseId;
     }
 
-    public String getWarehouseName() {
-        return warehouseName;
-    }
-
-    public void setWarehouseName(String warehouseName) {
-        this.warehouseName = warehouseName;
-    }
-
-    public Location getWarehouseAddress() {
+    public int getWarehouseAddress() {
         return warehouseAddress;
     }
 
-    public void setWarehouseAddress(Location warehouseAddress) {
+    public void setWarehouseAddress(int warehouseAddress) {
         this.warehouseAddress = warehouseAddress;
     }
 
@@ -56,11 +73,11 @@ public class Warehouse {
         this.warehouseCapacity = warehouseCapacity;
     }
 
-    public Company getCompany() {
+    public int getCompany() {
         return company;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(int company) {
         this.company = company;
     }
 
@@ -68,10 +85,11 @@ public class Warehouse {
     public String toString() {
         return "Warehouse{" +
                 "warehouseId=" + warehouseId +
-                ", warehouseName='" + warehouseName + '\'' +
                 ", warehouseAddress=" + warehouseAddress +
                 ", warehouseCapacity=" + warehouseCapacity +
                 ", companyId=" + company +
                 '}';
     }
+
+
 }

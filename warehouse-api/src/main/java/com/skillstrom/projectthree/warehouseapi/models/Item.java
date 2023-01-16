@@ -1,6 +1,11 @@
 package com.skillstrom.projectthree.warehouseapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "item")
@@ -19,6 +24,11 @@ public class Item {
 
     @Column(name = "item_quantity")
     private int itemQuantity;
+
+    @JsonIgnore
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "inventory")
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
+    private Set<Warehouse> warehouses;
 
     public int getItemId() {
         return itemId;
