@@ -1,13 +1,25 @@
 package com.skillstrom.projectthree.warehouseapi.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
+import lombok.*;
+import lombok.extern.java.Log;
+import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
-import java.util.HashSet;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import java.util.List;
 import java.util.Set;
 
+
+@Log
 @Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "item")
 public class Item {
 
@@ -22,53 +34,14 @@ public class Item {
     @Column(name = "item_description")
     private String itemDescription;
 
-    @Column(name = "item_quantity")
-    private int itemQuantity;
+    @Column(name = "item_size")
+    private int itemSize;
 
+    @OneToMany(mappedBy = "item")
     @JsonIgnore
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "inventory")
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.MERGE, CascadeType.PERSIST})
-    private Set<Warehouse> warehouses;
+    private Set<Inventory> inventory;
 
-    public int getItemId() {
-        return itemId;
-    }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
-    }
 
-    public String getItemName() {
-        return itemName;
-    }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
-    public String getItemDescription() {
-        return itemDescription;
-    }
-
-    public void setItemDescription(String itemDescription) {
-        this.itemDescription = itemDescription;
-    }
-
-    public int getItemQuantity() {
-        return itemQuantity;
-    }
-
-    public void setItemQuantity(int itemQuantity) {
-        this.itemQuantity = itemQuantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "itemId=" + itemId +
-                ", itemName='" + itemName + '\'' +
-                ", itemDescription='" + itemDescription + '\'' +
-                ", itemQuantity=" + itemQuantity +
-                '}';
-    }
 }

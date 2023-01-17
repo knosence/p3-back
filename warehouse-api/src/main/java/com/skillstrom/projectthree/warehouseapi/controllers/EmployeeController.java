@@ -21,9 +21,9 @@ public class EmployeeController {
         return employeeService.findById(id);
     }
 
-    @GetMapping("{id}/warehouse")
-    public Iterable<Employee> findEmployeesByWarehouseId(@PathVariable int id) {
-        return employeeService.findEmployeesByWarehouseId(id);
+    @GetMapping
+    public Iterable<Employee> findAll() {
+        return employeeService.findAll();
     }
 
     @PutMapping("/{id}")

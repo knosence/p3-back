@@ -7,5 +7,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 
 
-    Iterable<Employee> findEmployeesByWarehouseId(int id);
+    //Iterable<Employee> findEmployeesByWarehouseId(int id);
 }

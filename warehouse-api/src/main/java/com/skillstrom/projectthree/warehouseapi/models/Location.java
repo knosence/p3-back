@@ -1,8 +1,16 @@
 package com.skillstrom.projectthree.warehouseapi.models;
 
+import lombok.*;
+import lombok.extern.java.Log;
+
 import javax.persistence.*;
 
+@Log
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "location")
 public class Location {
 
@@ -22,46 +30,6 @@ public class Location {
 
     @Column(name = "postal_code")
     private int postalCode;
-
-    public int getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(int locationId) {
-        this.locationId = locationId;
-    }
-
-    public String getStreetAddress() {
-        return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public int getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(int postalCode) {
-        this.postalCode = postalCode;
-    }
 
     @Override
     public String toString() {

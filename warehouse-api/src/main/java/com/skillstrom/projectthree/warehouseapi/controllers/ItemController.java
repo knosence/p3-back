@@ -16,35 +16,35 @@ public class ItemController {
 
 
     @GetMapping
-    public @ResponseBody Iterable<Item> findAll() {
+    public Iterable<Item> findAll() {
         return itemService.findAll();
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody Item findById(@PathVariable int id) {
+    public Item findById(@PathVariable int id) {
         return itemService.findById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public @ResponseBody Item save(@RequestBody Item item) {
+    public Item save(@RequestBody Item item) {
         return itemService.save(item);
     }
 
     @PutMapping("/{id}")
-    public @ResponseBody Item update(@RequestBody Item item, @PathVariable int id) {
+    public Item update(@RequestBody Item item, @PathVariable int id) {
         return itemService.update(item, id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public @ResponseBody void deleteById(@PathVariable int id) {
+    public void deleteById(@PathVariable int id) {
         itemService.deleteById(id);
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public @ResponseBody void delete(@RequestBody Item item) {
+    public void delete(@RequestBody Item item) {
         itemService.delete(item);
     }
 

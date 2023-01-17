@@ -1,8 +1,19 @@
 package com.skillstrom.projectthree.warehouseapi.models;
 
-import javax.persistence.*;
+import lombok.*;
+import lombok.extern.java.Log;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
+
+@Log
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "company")
 public class Company {
 
@@ -14,39 +25,21 @@ public class Company {
     @Column(name = "company_name")
     private String companyName;
 
-    @Column(name = "company_location")
-    private String locationId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "location_id")
+    private Location location;
 
-    public int getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getLocationId() {
-        return locationId;
-    }
-
-    public void setLocationId(String locationId) {
-        this.locationId = locationId;
-    }
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private Set<Warehouse> warehouse;
 
     @Override
     public String toString() {
         return "Company{" +
                 "companyId=" + companyId +
                 ", companyName='" + companyName + '\'' +
-                ", locationId='" + locationId + '\'' +
+                ", location=" + location +
+                ", warehouse=" + warehouse +
                 '}';
     }
+
 }

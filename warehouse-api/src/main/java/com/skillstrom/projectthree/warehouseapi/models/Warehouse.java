@@ -1,11 +1,21 @@
 package com.skillstrom.projectthree.warehouseapi.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+import lombok.extern.java.Log;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
+import static javax.persistence.CascadeType.ALL;
+
+
+@Log
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "warehouse")
 public class Warehouse {
 
@@ -21,75 +31,41 @@ public class Warehouse {
             generator = "warehouses_sequence"
     )
     @Column(name = "warehouse_id", updatable = false)
-    private int warehouseId;
+    private Integer warehouseId;
 
 
-    @Column(name = "warehouse_address")
-    private int warehouseAddress;
+    @OneToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     @Column(name = "warehouse_capacity")
     private int warehouseCapacity;
 
-    @Column(name = "company")
-    private int company;
 
-    @ManyToMany
-    @JoinTable(
-            name = "warehouse_employee",
-            joinColumns = @JoinColumn(name = "warehouse_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_quantity")
+    @OneToMany(
+            mappedBy = "warehouse",
+            cascade = ALL,
+            orphanRemoval = true
     )
-    private Set<Item> inventory = new HashSet<>();
+    private Set<Inventory> inventory;
 
-    public Set<Item> getItems() {
-        return inventory;
-    }
+    @OneToMany(mappedBy = "warehouse", cascade = ALL)
+    private Set<Employee> employees;
 
-    public void setItems(Item items) {
-        this.inventory.add(items);
-    }
-
-    public int getWarehouseId() {
-        return warehouseId;
-    }
-
-    public void setWarehouseId(int warehouseId) {
-        this.warehouseId = warehouseId;
-    }
-
-    public int getWarehouseAddress() {
-        return warehouseAddress;
-    }
-
-    public void setWarehouseAddress(int warehouseAddress) {
-        this.warehouseAddress = warehouseAddress;
-    }
-
-    public int getWarehouseCapacity() {
-        return warehouseCapacity;
-    }
-
-    public void setWarehouseCapacity(int warehouseCapacity) {
-        this.warehouseCapacity = warehouseCapacity;
-    }
-
-    public int getCompany() {
-        return company;
-    }
-
-    public void setCompany(int company) {
-        this.company = company;
-    }
+    @ManyToOne(cascade = ALL)
+    @JoinColumn(name = "company_id")
+    @JsonIgnore
+    private Company company;
 
     @Override
     public String toString() {
         return "Warehouse{" +
                 "warehouseId=" + warehouseId +
-                ", warehouseAddress=" + warehouseAddress +
+                ", location=" + location +
                 ", warehouseCapacity=" + warehouseCapacity +
-                ", companyId=" + company +
+                ", inventory=" + inventory +
+                ", employees=" + employees +
+                ", company=" + company +
                 '}';
     }
-
-
 }
