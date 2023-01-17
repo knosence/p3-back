@@ -34,7 +34,6 @@ public class Inventory {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    @JsonIgnore
     private Item item;
 
     @Override
