@@ -1,21 +1,19 @@
 package com.skillstrom.projectthree.warehouseapi.employee;
 
-import com.skillstrom.projectthree.warehouseapi.employee.Employee;
-
 public interface EmployeeService {
 
-        Iterable<Employee> findAll();
+    Iterable<Employee> findAll();
 
-        Employee findById(int id);
+    Employee findById(int id);
 
-        Employee save(Employee employee);
+    Employee save(Employee employee);
 
-        Employee update(Employee employee, int id);
+    Employee update(Employee employee, int id);
 
-        void delete(Employee employee);
+    void delete(Employee employee);
 
-        void deleteById(int id);
+    void deleteById(int id);
 
 
-        //Iterable<Employee> findEmployeesByWarehouseId(int id);
+    //Iterable<Employee> findEmployeesByWarehouseId(int id);
 }

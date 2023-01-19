@@ -2,18 +2,14 @@ package com.skillstrom.projectthree.warehouseapi.employee;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skillstrom.projectthree.warehouseapi.warehouse.Warehouse;
-import lombok.*;
+import lombok.Data;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
 
 @Log
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(
         name = "employee"
 )
@@ -39,11 +35,10 @@ public class Employee {
     @Column(name = "employee_password")
     private String employeePassword;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "warehouse_id")
     @JsonIgnore
     private Warehouse warehouse;
-
 
 
 }

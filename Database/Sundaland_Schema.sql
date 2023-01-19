@@ -21,10 +21,9 @@ CREATE TABLE company (
 
 CREATE TABLE warehouse (
     warehouse_id INT NOT NULL PRIMARY KEY,
-    warehouse_name VARCHAR(40) NOT NULL,
     location_id INT NOT NULL,
-    item_capacity INT NOT NULL,
-    company_id INT NOT NULL,
+    item_size INT NOT NULL,
+    company_id INT,
     FOREIGN KEY (company_id)
         REFERENCES company(company_id),
     FOREIGN KEY (location_id)
@@ -34,14 +33,14 @@ CREATE TABLE warehouse (
 CREATE TABLE item (
 	item_id INT NOT NULL PRIMARY KEY,
 	item_name VARCHAR(40) NOT NULL,
-	item_discription VARCHAR(255) NOT NULL,
+	item_description VARCHAR(255) NOT NULL,
 	item_size TINYINT NOT NULL
 );
 
 CREATE TABLE warehouse_inventory (
 	item_id INT NOT NULL,
 	warehouse_id INT NOT NULL,
-	item_count INT NOT NULL,
+	item_quantity INT NOT NULL,
     FOREIGN KEY (item_id) REFERENCES item(item_id),
 	FOREIGN KEY (warehouse_id) REFERENCES warehouse(warehouse_id)
 
@@ -52,8 +51,8 @@ CREATE TABLE employee (
     first_name VARCHAR(20) NOT NULL,
     Last_name VARCHAR(40) NOT NULL,
     warehouse_id INT NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    password VARCHAR(30) NOT NULL,
+    employee_email VARCHAR(50) NOT NULL,
+    employee_password VARCHAR(30) NOT NULL,
     user_role VARCHAR(20) NOT NULL,
     FOREIGN KEY (warehouse_id)
         REFERENCES warehouse (warehouse_id)

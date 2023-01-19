@@ -1,16 +1,13 @@
 package com.skillstrom.projectthree.warehouseapi.location;
 
-import lombok.*;
+import lombok.Data;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
 
 @Log
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(name = "location")
 public class Location {
 

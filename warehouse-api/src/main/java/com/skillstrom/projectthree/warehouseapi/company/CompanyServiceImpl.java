@@ -1,8 +1,5 @@
 package com.skillstrom.projectthree.warehouseapi.company;
 
-import com.skillstrom.projectthree.warehouseapi.company.Company;
-import com.skillstrom.projectthree.warehouseapi.company.CompanyRepository;
-import com.skillstrom.projectthree.warehouseapi.company.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,33 +18,32 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public Company getCompanyById(int id) {
+    public Company getById(int id) {
         Optional<Company> company = companyRepository.findById(id);
         return company.orElse(null);
     }
 
     @Override
-    public Company updateCompany(Company company, int id) {
-        Optional<Company> company1 = companyRepository.findById(id);
-        if (!company1.isPresent()) {
-            return null;
+    public Company update(Company company, int id) {
+        if (companyRepository.existsById(id)) {
+            company.setCompanyId(id);
+            return companyRepository.save(company);
         }
-        company.setCompanyId(id);
-        return companyRepository.save(company);
-    }
-
-    @Override
-    public Company createCompany(Company company) {
         return null;
     }
 
     @Override
-    public void deleteCompany(Company company) {
-
+    public Company create(Company company) {
+        return companyRepository.save(company);
     }
 
     @Override
-    public void deleteCompanyById(int id) {
+    public void delete(Company company) {
+        companyRepository.delete(company);
+    }
 
+    @Override
+    public void deleteById(int id) {
+        companyRepository.deleteById(id);
     }
 }

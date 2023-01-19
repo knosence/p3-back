@@ -1,8 +1,5 @@
 package com.skillstrom.projectthree.warehouseapi.item;
 
-import com.skillstrom.projectthree.warehouseapi.item.Item;
-import com.skillstrom.projectthree.warehouseapi.item.ItemRepository;
-import com.skillstrom.projectthree.warehouseapi.item.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

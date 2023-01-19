@@ -1,7 +1,5 @@
 package com.skillstrom.projectthree.warehouseapi.warehouse;
 
-import com.skillstrom.projectthree.warehouseapi.warehouse.Warehouse;
-import com.skillstrom.projectthree.warehouseapi.warehouse.WarehouseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

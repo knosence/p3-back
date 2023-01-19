@@ -13,23 +13,23 @@ INSERT INTO company (company_id, company_name, location_id)
 VALUES 
     (1, 'Sundaland', 1);
 
-INSERT INTO warehouse (warehouse_id, warehouse_name, location_id, item_capacity, company_id) 
+INSERT INTO warehouse (warehouse_id, location_id, warehouse_capacity, company_id)
 VALUES  
-    (101, 'Warehouse101', 1, 15, 1),
-    (102, 'Warehouse102', 2, 19, 1),
-    (103, 'Warehouse103', 3, 13, 1),
-    (104, 'Warehouse104', 4, 20, 1),
-    (105, 'Warehouse105', 5, 14, 1),
-    (106, 'Warehouse106', 6, 18, 1);
+    (101, 1, 15, 1),
+    (102, 2, 19, 1),
+    (103, 3, 13, 1),
+    (104, 4, 20, 1),
+    (105, 5, 14, 1),
+    (106, 6, 18, 1);
 
-INSERT INTO employee (employee_id, first_name, Last_name, warehouse_id, email, password, user_role) 
+INSERT INTO employee (employee_id, first_name, Last_name, warehouse_id, employee_email, employee_password, user_role) 
 VALUES 
     (1, 'Admin', 'Admin', 101, 'admin@Sundaland.com', 'admin', 'admin'),
     (2, 'Guest', 'Guest', 101, 'guest@Sundaland.com', 'guest', 'guest'),
     (3, 'Manager', 'Manager', 101, 'Manager@Sundaland.com', 'manager', 'manager'),
     (4, 'Employee', 'Employee', 101, 'Employee@Sundaland.com', 'employee', 'user');
 
-INSERT INTO item (item_id, item_name, item_discription, item_size) 
+INSERT INTO item (item_id, item_name, item_description, item_size) 
 VALUES 
     (1, 'Oil - Grapeseed Oil', 'arcu libero rutrum ac lobortis vel dapibus', 17),
     (2, 'Compound - Passion Fruit', 'justo lacinia eget tincidunt eget tempus vel pede morbi', 13),
@@ -82,7 +82,7 @@ VALUES
     (49, 'Creme De Cacao White', 'dis parturient montes nascetur ridiculus mus', 13),
     (50, 'Liners - Baking Cups', 'posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti', 19);
 
-INSERT INTO warehouse_inventory (item_id, warehouse_id, item_count) 
+INSERT INTO warehouse_inventory (item_id, warehouse_id, item_quantity) 
 VALUES 
 	(11, 101, 23),
     (28, 102, 24),

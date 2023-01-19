@@ -5,21 +5,21 @@ import com.skillstrom.projectthree.warehouseapi.company.Company;
 import com.skillstrom.projectthree.warehouseapi.employee.Employee;
 import com.skillstrom.projectthree.warehouseapi.inventory.Inventory;
 import com.skillstrom.projectthree.warehouseapi.location.Location;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.ALL;
 
 
 @Log
 @Entity
-@Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 @Table(name = "warehouse")
 public class Warehouse {
 
@@ -48,15 +48,14 @@ public class Warehouse {
 
     @OneToMany(
             mappedBy = "warehouse",
-            cascade = ALL,
-            orphanRemoval = true
-    )
+            orphanRemoval = true,
+            cascade = CascadeType.ALL)
     private Set<Inventory> inventory;
 
-    @OneToMany(mappedBy = "warehouse", cascade = ALL)
+    @OneToMany(mappedBy = "warehouse" , cascade = CascadeType.ALL)
     private Set<Employee> employees;
 
-    @ManyToOne(cascade = ALL)
+    @ManyToOne
     @JoinColumn(name = "company_id")
     @JsonIgnore
     private Company company;
@@ -72,4 +71,6 @@ public class Warehouse {
                 ", company=" + company +
                 '}';
     }
+
+
 }

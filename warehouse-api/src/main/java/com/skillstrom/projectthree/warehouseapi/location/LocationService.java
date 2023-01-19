@@ -1,6 +1,5 @@
 package com.skillstrom.projectthree.warehouseapi.location;
 
-import com.skillstrom.projectthree.warehouseapi.location.Location;
 public interface LocationService {
 
     Iterable<Location> findAll();
@@ -14,8 +13,6 @@ public interface LocationService {
     void delete(Location location);
 
     void deleteById(int id);
-
-
 
 
 }

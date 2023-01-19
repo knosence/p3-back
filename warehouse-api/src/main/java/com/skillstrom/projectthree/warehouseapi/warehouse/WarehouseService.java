@@ -1,7 +1,5 @@
 package com.skillstrom.projectthree.warehouseapi.warehouse;
 
-import com.skillstrom.projectthree.warehouseapi.warehouse.Warehouse;
-
 public interface WarehouseService {
 
     Iterable<Warehouse> findAll();

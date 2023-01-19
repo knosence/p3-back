@@ -11,7 +11,7 @@ public class LocationServiceImpl implements LocationService {
     @Autowired
     private LocationRepository locationRepository;
 
-    private Logger log = LoggerFactory.getLogger(LocationServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(LocationServiceImpl.class);
 
     @Override
     public Iterable<Location> findAll() {
@@ -50,7 +50,6 @@ public class LocationServiceImpl implements LocationService {
     public void deleteById(int id) {
         locationRepository.deleteById(id);
     }
-
 
 
 }

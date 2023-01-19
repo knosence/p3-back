@@ -1,20 +1,18 @@
 package com.skillstrom.projectthree.warehouseapi.company;
 
-import com.skillstrom.projectthree.warehouseapi.company.Company;
-
 public interface CompanyService {
 
-        Iterable<Company> getAllCompanies();
+    Iterable<Company> getAllCompanies();
 
-        Company getCompanyById(int id);
+    Company getById(int id);
 
-        Company updateCompany(Company company, int id);
+    Company update(Company company, int id);
 
-        Company createCompany(Company company);
+    Company create(Company company);
 
-        void deleteCompany(Company company);
+    void delete(Company company);
 
-        void deleteCompanyById(int id);
+    void deleteById(int id);
 
 
 }

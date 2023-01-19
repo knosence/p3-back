@@ -2,22 +2,16 @@ package com.skillstrom.projectthree.warehouseapi.item;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skillstrom.projectthree.warehouseapi.inventory.Inventory;
-import lombok.*;
+import lombok.Data;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Set;
 
 
 @Log
 @Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(name = "item")
 public class Item {
 
@@ -35,11 +29,9 @@ public class Item {
     @Column(name = "item_size")
     private int itemSize;
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item" , cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Inventory> inventory;
-
-
 
 
 }

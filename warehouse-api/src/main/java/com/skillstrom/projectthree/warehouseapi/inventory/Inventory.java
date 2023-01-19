@@ -3,17 +3,18 @@ package com.skillstrom.projectthree.warehouseapi.inventory;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.skillstrom.projectthree.warehouseapi.item.Item;
 import com.skillstrom.projectthree.warehouseapi.warehouse.Warehouse;
-import lombok.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Log
 @Entity
-@Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 @Table(
         name = "warehouse_inventory"
 )
@@ -45,4 +46,5 @@ public class Inventory {
                 ", item=" + item +
                 '}';
     }
+
 }

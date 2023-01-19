@@ -2,7 +2,7 @@ package com.skillstrom.projectthree.warehouseapi.company;
 
 import com.skillstrom.projectthree.warehouseapi.location.Location;
 import com.skillstrom.projectthree.warehouseapi.warehouse.Warehouse;
-import lombok.*;
+import lombok.Data;
 import lombok.extern.java.Log;
 
 import javax.persistence.*;
@@ -10,10 +10,7 @@ import java.util.Set;
 
 @Log
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Table(name = "company")
 public class Company {
 

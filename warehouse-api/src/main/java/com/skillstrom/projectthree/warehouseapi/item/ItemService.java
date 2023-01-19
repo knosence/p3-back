@@ -1,19 +1,17 @@
 package com.skillstrom.projectthree.warehouseapi.item;
 
-import com.skillstrom.projectthree.warehouseapi.item.Item;
-
 public interface ItemService {
 
-        Iterable<Item> findAll();
+    Iterable<Item> findAll();
 
-        Item findById(int id);
+    Item findById(int id);
 
-        Item save(Item item);
+    Item save(Item item);
 
-        Item update(Item item, int id);
+    Item update(Item item, int id);
 
-        void delete(Item item);
+    void delete(Item item);
 
-        void deleteById(int id);
+    void deleteById(int id);
 
 }
