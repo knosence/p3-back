@@ -31,7 +31,7 @@ public class EmployeeController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public Employee create(@RequestBody Employee employee) {
-        return employeeService.save(employee);
+        return employeeService.create(employee);
     }
 
     @DeleteMapping

@@ -12,6 +12,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class CompanyServiceTests {
@@ -58,25 +62,27 @@ public class CompanyServiceTests {
 
     @Test
     void updateCompany_Successful() {
+        Mockito.when(companyRepository.existsById(1)).thenReturn(true);
         Mockito.when(companyRepository.save(company)).thenReturn(company);
         Company result = companyService.update(company, 1);
+
         assertEquals(company, result);
 
+        verify(companyRepository, times(1)).existsById(anyInt());
+        verify(companyRepository, times(1)).save(any());
     }
 
     @Test
     void deleteCompany_Successful() {
-        Mockito.when(companyRepository.findById(1)).thenReturn(java.util.Optional.of(company));
         companyService.delete(company);
-        Mockito.verify(companyRepository, Mockito.times(1)).delete(company);
+        verify(companyRepository).delete(company);
 
     }
 
     @Test
-    void deleteCompanyById_Successful() {
-        Mockito.when(companyRepository.findById(1)).thenReturn(java.util.Optional.of(company));
+    void deleteById_Successful() {
         companyService.deleteById(1);
-        Mockito.verify(companyRepository, Mockito.times(1)).deleteById(1);
+        verify(companyRepository).deleteById(1);
     }
 
 

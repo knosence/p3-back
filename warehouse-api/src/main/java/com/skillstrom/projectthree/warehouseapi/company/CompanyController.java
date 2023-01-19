@@ -27,8 +27,7 @@ public class CompanyController {
     }
 
     @PostMapping
-    public Company save(@RequestBody Company company) {
-        System.out.println("Company " + company + " created");
+    public Company create(@RequestBody Company company) {
         return companyService.create(company);
     }
 

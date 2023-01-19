@@ -6,7 +6,7 @@ public interface EmployeeService {
 
     Employee findById(int id);
 
-    Employee save(Employee employee);
+    Employee create(Employee employee);
 
     Employee update(Employee employee, int id);
 
@@ -14,6 +14,4 @@ public interface EmployeeService {
 
     void deleteById(int id);
 
-
-    //Iterable<Employee> findEmployeesByWarehouseId(int id);
 }

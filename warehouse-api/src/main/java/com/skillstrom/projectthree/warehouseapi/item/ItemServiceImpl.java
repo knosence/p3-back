@@ -23,7 +23,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item save(Item item) {
+    public Item create(Item item) {
         if (!itemRepository.existsById(item.getItemId())) {
             return itemRepository.save(item);
         }

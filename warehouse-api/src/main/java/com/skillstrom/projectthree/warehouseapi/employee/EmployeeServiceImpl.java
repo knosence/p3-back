@@ -18,16 +18,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findById(int id) {
-        Optional<Employee> employee = employeeRepository.findById(id);
-        return employee.orElse(null);
+        if (!employeeRepository.findById(id).isPresent()) {
+            return null;
+        }
+        return employeeRepository.findById(id).get();
     }
 
     @Override
-    public Employee save(Employee employee) {
-        if (!employeeRepository.existsById(employee.getEmployeeId())) {
-            return employeeRepository.save(employee);
-        }
-        return null;
+    public Employee create(Employee employee) {
+        return employeeRepository.save(employee);
     }
 
     @Override
@@ -46,14 +45,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteById(int id) {
-        if (employeeRepository.existsById(id)) {
-            employeeRepository.deleteById(id);
-        }
-
+        employeeRepository.deleteById(id);
     }
-
-    //@Override
-    //public Iterable<Employee> findEmployeesByWarehouseId(int id) {
-    //    return employeeRepository.findEmployeesByWarehouseId(id);
-    //}
 }

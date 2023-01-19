@@ -6,7 +6,7 @@ public interface ItemService {
 
     Item findById(int id);
 
-    Item save(Item item);
+    Item create(Item item);
 
     Item update(Item item, int id);
 

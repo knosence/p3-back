@@ -2,7 +2,6 @@ package com.skillstrom.projectthree.warehouseapi.company;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.skillstrom.projectthree.warehouseapi.location.Location;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ class CompanyControllerTests {
     private CompanyService companyService;
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
 
 
     @Test
