@@ -3,6 +3,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.properties
+/warehouse-api/src/main/resources
 
 ### STS ###
 .apt_generated
