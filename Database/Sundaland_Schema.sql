@@ -4,10 +4,10 @@ CREATE DATABASE sundaland;
 USE sundaland;
 
 CREATE TABLE location (
-	location_id INT NOT NULL PRIMARY KEY,
+	location_id INT NOT NULL PRIMARY KEY ,
 	street_address VARCHAR(60) NOT NULL,
 	city VARCHAR(40) NOT NULL,
-	state CHAR(2) NOT NULL,
+	state varchar(2) NOT NULL,
 	postal_code INT NOT NULL
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE company (
 CREATE TABLE warehouse (
     warehouse_id INT NOT NULL PRIMARY KEY,
     location_id INT NOT NULL,
-    item_size INT NOT NULL,
+    warehouse_capacity INT NOT NULL,
     company_id INT,
     FOREIGN KEY (company_id)
         REFERENCES company(company_id),
@@ -38,6 +38,7 @@ CREATE TABLE item (
 );
 
 CREATE TABLE warehouse_inventory (
+	inventory_id INT NOT NULL,
 	item_id INT NOT NULL,
 	warehouse_id INT NOT NULL,
 	item_quantity INT NOT NULL,
