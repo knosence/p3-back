@@ -4,7 +4,7 @@ CREATE DATABASE sundaland;
 USE sundaland;
 
 CREATE TABLE location (
-	location_id INT NOT NULL PRIMARY KEY ,
+	location_id INT NOT NULL PRIMARY KEY,
 	street_address VARCHAR(60) NOT NULL,
 	city VARCHAR(40) NOT NULL,
 	state varchar(2) NOT NULL,
@@ -15,7 +15,9 @@ CREATE TABLE company (
     company_id INT NOT NULL PRIMARY KEY,
     company_name VARCHAR(40) NOT NULL,
    	location_id INT NOT NULL,
-    FOREIGN KEY (location_id) REFERENCES location(location_id)
+    CONSTRAINT fk_company_location 
+    	FOREIGN KEY (location_id) 
+    		REFERENCES location(location_id)
 
 );
 
@@ -24,10 +26,12 @@ CREATE TABLE warehouse (
     location_id INT NOT NULL,
     warehouse_capacity INT NOT NULL,
     company_id INT,
-    FOREIGN KEY (company_id)
-        REFERENCES company(company_id),
-    FOREIGN KEY (location_id)
-        REFERENCES location(location_id)
+    CONSTRAINT fk_warehouse_company
+	    FOREIGN KEY (company_id)
+	        REFERENCES company(company_id),
+	CONSTRAINT fk_warehouse_location
+	    FOREIGN KEY (location_id)
+	        REFERENCES location(location_id)
 );
 
 CREATE TABLE item (
@@ -38,12 +42,16 @@ CREATE TABLE item (
 );
 
 CREATE TABLE warehouse_inventory (
-	inventory_id INT NOT NULL,
+	inventory_id INT NOT NULL PRIMARY KEY,
 	item_id INT NOT NULL,
 	warehouse_id INT NOT NULL,
 	item_quantity INT NOT NULL,
-    FOREIGN KEY (item_id) REFERENCES item(item_id),
-	FOREIGN KEY (warehouse_id) REFERENCES warehouse(warehouse_id)
+	CONSTRAINT fk_inventory_item
+    	FOREIGN KEY (item_id) 
+    		REFERENCES item(item_id),
+    CONSTRAINT fk_warehouse_inventory
+		FOREIGN KEY (warehouse_id) 
+			REFERENCES warehouse(warehouse_id)
 
 );
 
@@ -55,9 +63,8 @@ CREATE TABLE employee (
     employee_email VARCHAR(50) NOT NULL,
     employee_password VARCHAR(30) NOT NULL,
     user_role VARCHAR(20) NOT NULL,
-    FOREIGN KEY (warehouse_id)
-        REFERENCES warehouse (warehouse_id)
+    CONSTRAINT fk_employee_warehouse
+    	FOREIGN KEY (warehouse_id)
+        	REFERENCES warehouse (warehouse_id)
 );
-
-
 
