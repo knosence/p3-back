@@ -5,9 +5,15 @@ import com.skillstorm.p3one.repository.CompanyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 @Service
+@Primary
+@Transactional
 public class CompanyServiceImpl implements CompanyService {
 
     final
@@ -22,43 +28,42 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public Iterable<Company> findAll() {
-        Iterable<Company> companies = companyRepository.findAll();
-        logger.info("Found {} companies", companies.spliterator().getExactSizeIfKnown());
-        return companies;
+        return companyRepository.findAll();
     }
 
     @Override
     public Company findById(int id) {
-        Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
-        logger.info("Found company {}", company);
-        return company;
+        //Company company = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
+        //logger.info("Found company {}", company);
+        //return company;
+
+        Optional<Company> company = companyRepository.findById(id);
+        return company.isPresent() ? company.get() : null;
+
     }
 
     @Override
     public Company save(Company company) {
-        Company company1 = companyRepository.save(company);
-        logger.info("Saved company {}", company1);
-        return company1;
+        //Company company1 = companyRepository.save(company);
+        //logger.info("Saved company {}", company1);
+        //return company1;
+
+        return companyRepository.save(company);
     }
 
     @Override
     public void deleteById(int id) {
-        companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
+        //companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
+        //companyRepository.deleteById(id);
+        //logger.info("Deleted company with id {}", id);
+
         companyRepository.deleteById(id);
-        logger.info("Deleted company with id {}", id);
     }
 
     @Override
     public Company update(Company company, int id) {
-
-        Company company1 = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found"));
-
-        company1.setId(id);
-        company1.setCompanyName(company.getCompanyName());
-        company1.setLocation(company.getLocation());
-        logger.info("Updated company {}", company1);
-
-        return companyRepository.save(company1);
+        company.setId(id);
+        return companyRepository.save(company);
 
     }
 

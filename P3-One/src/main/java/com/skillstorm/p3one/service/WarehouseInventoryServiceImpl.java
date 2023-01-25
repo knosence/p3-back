@@ -26,32 +26,30 @@ public class WarehouseInventoryServiceImpl implements WarehouseInventoryService 
 
     @Override
     public WarehouseInventory findById(int id) {
-        return warehouseInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse Inventory not found"));
+        return warehouseInventoryRepository.findById(id).get(); //.orElseThrow(() -> new RuntimeException("Warehouse Inventory not found"));
     }
 
     @Override
     public WarehouseInventory save(WarehouseInventory warehouseInventory) {
-        if (warehouseInventory.getId() != 0) {
-            throw new RuntimeException("Warehouse Inventory already exists");
-        }
+        //if (warehouseInventory.getId() != 0) {
+        //    throw new RuntimeException("Warehouse Inventory already exists");
+        //}
         return warehouseInventoryRepository.save(warehouseInventory);
     }
 
     @Override
     public void deleteById(int id) {
-        warehouseInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse Inventory not found"));
-        warehouseInventoryRepository.deleteById(id);
+        //warehouseInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse Inventory not found"));
+        WarehouseInventory warehouseInventory = warehouseInventoryRepository.findById(id).get();
+        warehouseInventoryRepository.delete(warehouseInventory);
     }
 
     @Override
-    public WarehouseInventory update(WarehouseInventory warehouseInventory, int id) {
-        WarehouseInventory warehouseInventory1 = warehouseInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse Inventory not found"));
-        logger.info("Warehouse Inventory updated" + warehouseInventory1 + "or" + warehouseInventory);
-        warehouseInventory1.setId(id);
-        warehouseInventory1.setWarehouse(warehouseInventory.getWarehouse());
-        warehouseInventory1.setItem(warehouseInventory.getItem());
-        warehouseInventory1.setItemQuantity(warehouseInventory.getItemQuantity());
-        return warehouseInventoryRepository.save(warehouseInventory1);
+    public WarehouseInventory update(WarehouseInventory warehouseInventory, Integer id) {
+        //WarehouseInventory warehouseInventory1 = warehouseInventoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse Inventory not found"));
+        //logger.info("Warehouse Inventory updated" + warehouseInventory1 + "or" + warehouseInventory);
+        warehouseInventory.setId(id);
+        return warehouseInventoryRepository.save(warehouseInventory);
     }
 
 }

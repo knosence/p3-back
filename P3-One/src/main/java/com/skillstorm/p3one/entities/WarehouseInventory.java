@@ -40,7 +40,6 @@ public class WarehouseInventory {
         this.id = id;
     }
 
-    @JsonBackReference(value = "warehouse-item")
     public Item getItem() {
         return item;
     }
@@ -49,7 +48,6 @@ public class WarehouseInventory {
         this.item = item;
     }
 
-    @JsonBackReference(value = "warehouse-inventory")
     public Warehouse getWarehouse() {
         return warehouse;
     }

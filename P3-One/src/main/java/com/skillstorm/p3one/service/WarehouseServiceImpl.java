@@ -24,31 +24,32 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public Warehouse findById(int id) {
-        return warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));
+        return warehouseRepository.findById(id).get(); //.orElseThrow(() -> new RuntimeException("Warehouse not found"));
     }
 
     @Override
     public Warehouse save(Warehouse warehouse) {
-        if (warehouse.getId() != 0) {
-            throw new RuntimeException("Warehouse already exists");
-        }
+        //if (warehouse.getId() != 0) {
+        //    throw new RuntimeException("Warehouse already exists");
+        //}
         return warehouseRepository.save(warehouse);
     }
 
     @Override
     public void deleteById(int id) {
-        warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));
-        warehouseRepository.deleteById(id);
+        //warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));
+        Warehouse warehouse1 = warehouseRepository.findById(id).get();
+        warehouseRepository.delete(warehouse1);
     }
 
     @Override
     public Warehouse update(Warehouse warehouse, int id) {
-        Warehouse warehouse1 = warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));
+        //Warehouse warehouse1 = warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));
 
-        warehouse1.setId(id);
-        warehouse1.setWarehouseCapacity(warehouse.getWarehouseCapacity());
-        warehouse1.setLocation(warehouse.getLocation());
-        warehouse1.setEmployees(warehouse.getEmployees());
-        return warehouseRepository.save(warehouse1);
+        warehouse.setId(id);
+        //warehouse1.setWarehouseCapacity(warehouse.getWarehouseCapacity());
+        //warehouse1.setLocation(warehouse.getLocation());
+        //warehouse1.setEmployees(warehouse.getEmployees());
+        return warehouseRepository.save(warehouse);
     }
 }

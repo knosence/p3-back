@@ -43,15 +43,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee update(Employee employee, int id) {
-        Employee employee1 = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found"));
+        //Employee employee1 = employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found"));
 
-        employee1.setId(id);
-        employee1.setFirstName(employee.getFirstName());
-        employee1.setLastName(employee.getLastName());
-        employee1.setEmployeeEmail(employee.getEmployeeEmail());
-        employee1.setEmployeePassword(employee.getEmployeePassword());
-        employee1.setUserRole(employee.getUserRole());
-        return employeeRepository.save(employee1);
+        employee.setId(id);
+        //employee1.setFirstName(employee.getFirstName());
+        //employee1.setLastName(employee.getLastName());
+        //employee1.setEmployeeEmail(employee.getEmployeeEmail());
+        //employee1.setEmployeePassword(employee.getEmployeePassword());
+        //employee1.setUserRole(employee.getUserRole());
+        return employeeRepository.save(employee);
 
     }
 

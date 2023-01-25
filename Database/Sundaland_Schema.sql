@@ -29,7 +29,7 @@ CONSTRAINT FK_CompanyWarehouse
         REFERENCES company(company_id),
 CONSTRAINT FK_WarehouseLocation
     FOREIGN KEY (location_id)
-        REFERENCES location(location_id),
+        REFERENCES location(location_id)
 );
 
 CREATE TABLE item (

@@ -12,7 +12,7 @@ public interface WarehouseInventoryService {
 
     void deleteById(int id);
 
-    WarehouseInventory update(WarehouseInventory warehouseInventory, int id);
+    WarehouseInventory update(WarehouseInventory warehouseInventory, Integer id);
 
 
 }
