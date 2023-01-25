@@ -1,12 +1,19 @@
 package com.skillstorm.p3one.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "warehouse_inventory")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class WarehouseInventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +22,11 @@ public class WarehouseInventory {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "item_id", nullable = false)
-    @JsonBackReference(value = "warehouse-item")
     private Item item;
 
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "warehouse_id", nullable = false)
-    @JsonBackReference(value = "warehouse-inventory")
     private Warehouse warehouse;
 
     @Column(name = "item_quantity", nullable = false)
@@ -35,6 +40,7 @@ public class WarehouseInventory {
         this.id = id;
     }
 
+    @JsonBackReference(value = "warehouse-item")
     public Item getItem() {
         return item;
     }
@@ -43,6 +49,7 @@ public class WarehouseInventory {
         this.item = item;
     }
 
+    @JsonBackReference(value = "warehouse-inventory")
     public Warehouse getWarehouse() {
         return warehouse;
     }

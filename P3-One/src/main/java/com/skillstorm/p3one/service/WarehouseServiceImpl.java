@@ -49,7 +49,6 @@ public class WarehouseServiceImpl implements WarehouseService {
         warehouse1.setWarehouseCapacity(warehouse.getWarehouseCapacity());
         warehouse1.setLocation(warehouse.getLocation());
         warehouse1.setEmployees(warehouse.getEmployees());
-        warehouse1.setWarehouseInventories(warehouse.getWarehouseInventories());
         return warehouseRepository.save(warehouse1);
     }
 }

@@ -56,7 +56,6 @@ public class CompanyServiceImpl implements CompanyService {
         company1.setId(id);
         company1.setCompanyName(company.getCompanyName());
         company1.setLocation(company.getLocation());
-        company1.setWarehouses(company.getWarehouses());
         logger.info("Updated company {}", company1);
 
         return companyRepository.save(company1);

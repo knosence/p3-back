@@ -1,7 +1,9 @@
 package com.skillstorm.p3one.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +14,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "company")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,12 +29,10 @@ public class Company {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
-    @JsonBackReference(value = "company-location")
     private Location location;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference(value = "company-warehouse")
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "warehouse_id")
     private Set<Warehouse> warehouses = new LinkedHashSet<>();
 
     public Integer getId() {

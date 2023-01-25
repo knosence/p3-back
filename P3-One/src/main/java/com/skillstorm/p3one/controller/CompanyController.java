@@ -2,12 +2,16 @@ package com.skillstorm.p3one.controller;
 
 import com.skillstorm.p3one.entities.Company;
 import com.skillstorm.p3one.service.CompanyService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/company")
 @CrossOrigin(origins = "*")
 public class CompanyController {
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     final
     CompanyService companyService;

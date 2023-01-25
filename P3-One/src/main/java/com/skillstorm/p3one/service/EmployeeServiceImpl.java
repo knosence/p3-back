@@ -51,7 +51,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee1.setEmployeeEmail(employee.getEmployeeEmail());
         employee1.setEmployeePassword(employee.getEmployeePassword());
         employee1.setUserRole(employee.getUserRole());
-        employee1.setWarehouse(employee.getWarehouse());
         return employeeRepository.save(employee1);
 
     }

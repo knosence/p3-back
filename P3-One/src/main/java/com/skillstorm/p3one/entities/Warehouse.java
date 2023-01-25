@@ -1,7 +1,6 @@
 package com.skillstorm.p3one.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +11,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "warehouse")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,26 +23,15 @@ public class Warehouse {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
-    @JsonBackReference(value = "warehouse-location")
     private Location location;
 
     @Column(name = "warehouse_capacity", nullable = false)
     private Integer warehouseCapacity;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    @JsonBackReference(value = "company-warehouse")
-    private Company company;
-
-    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
+    @OneToMany
+    @JoinColumn(name = "employee_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference(value = "warehouse-employee")
     private Set<Employee> employees = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "warehouse", cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference(value = "warehouse-inventory")
-    private Set<WarehouseInventory> warehouseInventories = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -65,13 +57,6 @@ public class Warehouse {
         this.warehouseCapacity = warehouseCapacity;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
 
     public Set<Employee> getEmployees() {
         return employees;
@@ -81,25 +66,17 @@ public class Warehouse {
         this.employees = employees;
     }
 
-    public Set<WarehouseInventory> getWarehouseInventories() {
-        return warehouseInventories;
-    }
-
-    public void setWarehouseInventories(Set<WarehouseInventory> warehouseInventories) {
-        this.warehouseInventories = warehouseInventories;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Warehouse warehouse = (Warehouse) o;
-        return Objects.equals(getId(), warehouse.getId()) && Objects.equals(getLocation(), warehouse.getLocation()) && Objects.equals(getWarehouseCapacity(), warehouse.getWarehouseCapacity()) && Objects.equals(getCompany(), warehouse.getCompany()) && Objects.equals(getEmployees(), warehouse.getEmployees()) && Objects.equals(getWarehouseInventories(), warehouse.getWarehouseInventories());
+        return Objects.equals(getId(), warehouse.getId()) && Objects.equals(getLocation(), warehouse.getLocation()) && Objects.equals(getWarehouseCapacity(), warehouse.getWarehouseCapacity()) && Objects.equals(getEmployees(), warehouse.getEmployees()) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLocation(), getWarehouseCapacity(), getCompany(), getEmployees(), getWarehouseInventories());
+        return Objects.hash(getId(), getLocation(), getWarehouseCapacity(), getEmployees());
     }
 
     @Override
@@ -108,9 +85,7 @@ public class Warehouse {
                 "id=" + id +
                 ", location=" + location +
                 ", warehouseCapacity=" + warehouseCapacity +
-                ", company=" + company +
                 ", employees=" + employees +
-                ", warehouseInventories=" + warehouseInventories +
                 '}';
     }
 }

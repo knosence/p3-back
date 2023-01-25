@@ -19,11 +19,6 @@ public class Employee {
     @Column(name = "Last_name", nullable = false, length = 40)
     private String lastName;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "warehouse_id", nullable = false)
-    @JsonBackReference(value = "warehouse-employee")
-    private Warehouse warehouse;
-
     @Column(name = "employee_email", nullable = false, length = 50)
     private String employeeEmail;
 
@@ -57,14 +52,6 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public void setWarehouse(Warehouse warehouse) {
-        this.warehouse = warehouse;
-    }
-
     public String getEmployeeEmail() {
         return employeeEmail;
     }
@@ -94,12 +81,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(getId(), employee.getId()) && Objects.equals(getFirstName(), employee.getFirstName()) && Objects.equals(getLastName(), employee.getLastName()) && Objects.equals(getWarehouse(), employee.getWarehouse()) && Objects.equals(getEmployeeEmail(), employee.getEmployeeEmail()) && Objects.equals(getEmployeePassword(), employee.getEmployeePassword()) && Objects.equals(getUserRole(), employee.getUserRole());
+        return Objects.equals(getId(), employee.getId()) && Objects.equals(getFirstName(), employee.getFirstName()) && Objects.equals(getLastName(), employee.getLastName()) && Objects.equals(getEmployeeEmail(), employee.getEmployeeEmail()) && Objects.equals(getEmployeePassword(), employee.getEmployeePassword()) && Objects.equals(getUserRole(), employee.getUserRole());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getFirstName(), getLastName(), getWarehouse(), getEmployeeEmail(), getEmployeePassword(), getUserRole());
+        return Objects.hash(getId(), getFirstName(), getLastName(), getEmployeeEmail(), getEmployeePassword(), getUserRole());
     }
 
     @Override
@@ -108,7 +95,6 @@ public class Employee {
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", warehouse=" + warehouse +
                 ", employeeEmail='" + employeeEmail + '\'' +
                 ", employeePassword='" + employeePassword + '\'' +
                 ", userRole='" + userRole + '\'' +
