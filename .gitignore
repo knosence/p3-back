@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 *.properties
 *.yml
+application.yml
 
 
 ### STS ###
