@@ -24,14 +24,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee findById(int id) {
-        return employeeRepository.findById(id).orElseThrow(() -> new RuntimeException("Employee not found"));
+        return employeeRepository.findById(id).get();
     }
 
     @Override
     public Employee save(Employee employee) {
-        if (employee.getId() != 0) {
-            throw new RuntimeException("Employee already exists");
-        }
         return employeeRepository.save(employee);
     }
 

@@ -28,10 +28,7 @@ public class Warehouse {
     @Column(name = "warehouse_capacity", nullable = false)
     private Integer warehouseCapacity;
 
-    @OneToMany
-    @JoinColumn(name = "employee_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Set<Employee> employees = new LinkedHashSet<>();
+
 
     public Integer getId() {
         return id;
@@ -58,25 +55,19 @@ public class Warehouse {
     }
 
 
-    public Set<Employee> getEmployees() {
-        return employees;
-    }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
-    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Warehouse warehouse = (Warehouse) o;
-        return Objects.equals(getId(), warehouse.getId()) && Objects.equals(getLocation(), warehouse.getLocation()) && Objects.equals(getWarehouseCapacity(), warehouse.getWarehouseCapacity()) && Objects.equals(getEmployees(), warehouse.getEmployees()) ;
+        return Objects.equals(getId(), warehouse.getId()) && Objects.equals(getLocation(), warehouse.getLocation()) && Objects.equals(getWarehouseCapacity(), warehouse.getWarehouseCapacity());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getLocation(), getWarehouseCapacity(), getEmployees());
+        return Objects.hash(getId(), getLocation(), getWarehouseCapacity());
     }
 
     @Override
@@ -85,7 +76,6 @@ public class Warehouse {
                 "id=" + id +
                 ", location=" + location +
                 ", warehouseCapacity=" + warehouseCapacity +
-                ", employees=" + employees +
                 '}';
     }
 }

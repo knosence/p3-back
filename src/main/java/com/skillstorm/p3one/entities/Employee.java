@@ -28,6 +28,18 @@ public class Employee {
     @Column(name = "user_role", nullable = false, length = 20)
     private String userRole;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "warehouse_id", nullable = false)
+    private Warehouse warehouse;
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
+    }
+
     public Integer getId() {
         return id;
     }

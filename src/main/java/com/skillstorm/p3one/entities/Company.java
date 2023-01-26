@@ -31,10 +31,6 @@ public class Company {
     @JoinColumn(name = "location_id", nullable = false)
     private Location location;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "warehouse_id")
-    private Set<Warehouse> warehouses = new LinkedHashSet<>();
-
     public Integer getId() {
         return id;
     }
@@ -59,21 +55,12 @@ public class Company {
         this.location = location;
     }
 
-    public Set<Warehouse> getWarehouses() {
-        return warehouses;
-    }
-
-    public void setWarehouses(Set<Warehouse> warehouses) {
-        this.warehouses = warehouses;
-    }
-
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
                 ", location=" + location +
-                ", warehouses=" + warehouses +
                 '}';
     }
 
@@ -82,11 +69,11 @@ public class Company {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Company company = (Company) o;
-        return Objects.equals(getId(), company.getId()) && Objects.equals(getCompanyName(), company.getCompanyName()) && Objects.equals(getLocation(), company.getLocation()) && Objects.equals(getWarehouses(), company.getWarehouses());
+        return Objects.equals(getId(), company.getId()) && Objects.equals(getCompanyName(), company.getCompanyName()) && Objects.equals(getLocation(), company.getLocation()) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCompanyName(), getLocation(), getWarehouses());
+        return Objects.hash(getId(), getCompanyName(), getLocation());
     }
 }

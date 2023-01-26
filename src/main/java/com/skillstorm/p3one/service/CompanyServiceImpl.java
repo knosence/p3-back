@@ -22,6 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Autowired
     public CompanyServiceImpl(CompanyRepository companyRepository) {
+        super();
         this.companyRepository = companyRepository;
     }
 
