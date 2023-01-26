@@ -10,10 +10,6 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "warehouse_inventory")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 public class WarehouseInventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +17,12 @@ public class WarehouseInventory {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "item_id", nullable = false)
+    @JoinColumn(name = "item_id")
     private Item item;
 
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "warehouse_id", nullable = false)
+    @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
     @Column(name = "item_quantity", nullable = false)

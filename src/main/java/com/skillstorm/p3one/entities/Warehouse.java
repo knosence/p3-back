@@ -11,10 +11,6 @@ import java.util.Set;
 
 @Entity
 @Table(name = "warehouse")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +24,13 @@ public class Warehouse {
     @Column(name = "warehouse_capacity", nullable = false)
     private Integer warehouseCapacity;
 
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "company_id")
+    private Company company;
 
 
     public Integer getId() {
