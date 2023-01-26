@@ -1,7 +1,9 @@
 package com.skillstorm.p3one.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -23,13 +25,7 @@ public class Company {
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "location_id", nullable = false)
-    @JsonBackReference(value = "company-location")
     private Location location;
-
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonManagedReference(value = "company-warehouse")
-    private Set<Warehouse> warehouses = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -55,21 +51,12 @@ public class Company {
         this.location = location;
     }
 
-    public Set<Warehouse> getWarehouses() {
-        return warehouses;
-    }
-
-    public void setWarehouses(Set<Warehouse> warehouses) {
-        this.warehouses = warehouses;
-    }
-
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
                 ", companyName='" + companyName + '\'' +
                 ", location=" + location +
-                ", warehouses=" + warehouses +
                 '}';
     }
 
@@ -78,11 +65,11 @@ public class Company {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Company company = (Company) o;
-        return Objects.equals(getId(), company.getId()) && Objects.equals(getCompanyName(), company.getCompanyName()) && Objects.equals(getLocation(), company.getLocation()) && Objects.equals(getWarehouses(), company.getWarehouses());
+        return Objects.equals(getId(), company.getId()) && Objects.equals(getCompanyName(), company.getCompanyName()) && Objects.equals(getLocation(), company.getLocation()) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getCompanyName(), getLocation(), getWarehouses());
+        return Objects.hash(getId(), getCompanyName(), getLocation());
     }
 }

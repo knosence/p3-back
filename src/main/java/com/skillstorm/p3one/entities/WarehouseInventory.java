@@ -1,6 +1,9 @@
 package com.skillstorm.p3one.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.Objects;
@@ -14,14 +17,12 @@ public class WarehouseInventory {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "item_id", nullable = false)
-    @JsonBackReference(value = "warehouse-item")
+    @JoinColumn(name = "item_id")
     private Item item;
 
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "warehouse_id", nullable = false)
-    @JsonBackReference(value = "warehouse-inventory")
+    @JoinColumn(name = "warehouse_id")
     private Warehouse warehouse;
 
     @Column(name = "item_quantity", nullable = false)
